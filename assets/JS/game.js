@@ -1,5 +1,7 @@
+// HTML ELEMENT AND CLASS REFERENCES 
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'));
+// HTML ELEMENT AND CLASS REFERENCE END 
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -109,7 +111,7 @@ startGame = () => {
 // GETTING A NEW QUESTION 
 getNewQuestion = () => {
     if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
-        //go to the end page
+// GOES TO THE FINAL PAGE AFTER THE ABOVE FORMULA ENDS //
         return window.location.assign('./end.html');
     }
     questionCounter++;
@@ -125,19 +127,28 @@ getNewQuestion = () => {
     availableQuesions.splice(questionIndex, 1);
     acceptingAnswers = true;
 };
-// GETTING A NEW QUESTION END 
 
-// 
-choices.forEach((choice) => {
-    choice.addEventListener('click', (e) => {
-        if (!acceptingAnswers) return;
 
-        acceptingAnswers = false;
-        const selectedChoice = e.target;
-        const selectedAnswer = selectedChoice.dataset['number'];
+// CLICK EVENT LISTENER ON QUESTION CHOICES
+choices.forEach(choice => {
+    choice.addEventListener("click", e => {
+      if (!acceptingAnswers) return;
+  
+      acceptingAnswers = false;
+      const selectedChoice = e.target;
+      const selectedAnswer = selectedChoice.dataset["number"];
+        
+      const classToApply =
+        selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
+// ADDS COLOR TO ANSWER AND GOES TO NEXT QUESTION AFTER TIMER AS COMPLETED //
+      selectedChoice.parentElement.classList.add(classToApply);
+      setTimeout(() => {
+        selectedChoice.parentElement.classList.remove(classToApply);
         getNewQuestion();
+      }, 1000);
     });
-});
-
+  });
+// CLICK EVENT LISTENER ON QUESTION CHOICES
+// GETTING A NEW QUESTION END 
 startGame();
