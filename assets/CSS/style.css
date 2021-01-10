@@ -2,7 +2,7 @@
     background-color: #ecf5ff;
     font-size: 62.5%;
   }
-  
+  /* GLOBAL PARAMATERS */
   * {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
@@ -10,7 +10,9 @@
     padding: 0;
     color: #333;
   }
-  
+  /* GLOBAL PARAMATERS END */
+
+/* HEADER STYLING */
   h1,
   h2,
   h3,
@@ -39,9 +41,9 @@
     font-size: 2.8rem;
     font-weight: 500;
   }
+  /* HEADER STYLING END */
   
   /* UTILITIES */
-  
   .container {
     width: 100vw;
     height: 100vh;
@@ -77,6 +79,8 @@
   .hidden {
     display: none;
   }
+/* UTILITIES END */
+
   
   /* BUTTONS */
   .btn {
@@ -105,7 +109,7 @@
     box-shadow: none;
     transform: none;
   }
-
+/* BUTTONS END */
 
 
 

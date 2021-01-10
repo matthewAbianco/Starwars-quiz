@@ -1,4 +1,9 @@
 
+
+/* GAME PAGE STYLING  */
+
+/* BOX THE QUESTION RESIDES IN  */
+
 .choice-container {
     display: flex;
     margin-bottom: 0.5rem;
@@ -14,13 +19,21 @@
     transform: translateY(-0.1rem);
     transition: transform 150ms;
   }
-  
+  /* BOX THE QUESTION RESIDES IN END */
+
+
+  /* LETTER BESIDE QUESTION */
   .choice-prefix {
     padding: 1.5rem 2.5rem;
     background-color: #56a5eb;
     color: white;
   }
-  
+  /* LETTER BESIDE QUESTION END */
+
+
   .choice-text {
     padding: 1.5rem;
+    width: 100%;
   }
+
+  /* GAME PAGE STYLING END */
