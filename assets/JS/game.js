@@ -1,6 +1,9 @@
 // HTML ELEMENT AND CLASS REFERENCES 
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'));
+const questionCounterText = document.getElementById('questionCounter')
+const scoreText = document.getElementById('score')
+
 // HTML ELEMENT AND CLASS REFERENCE END 
 
 let currentQuestion = {};
@@ -96,8 +99,8 @@ let questions = [
 // QUIZ QUESTONS END
 
 //CONSTANTS
-const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 8;
+const correct_bonus = 1;
+const max_questions = 8;
 
 // START GAME BUTTON 
 startGame = () => {
@@ -108,13 +111,74 @@ startGame = () => {
 };
 // START GAME BUTTON END
 
+// GAME COUNTDOWN TIMER 
+const wrongAnswer = - 15;
+const startingMinutes = 1;
+let time = startingMinutes * 2;
+
+const countdownEl = document.getElementById('countdown');
+
+setInterval(updateCountdown, 1000);
+
+function updateCountdown() {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    countdownEl.innerHTML = `${minutes}:${seconds}`;
+    time --;
+
+    var timer = setInterval(function(){
+        sec--;
+        document.getElementById('countdown').innerHTML;
+        if (time < 0) {
+            clearInterval(timer);
+            alert("Time is up!")
+        }
+    }, 1000);
+}
+
+(function() {
+    var sec = 60;
+
+    function startTimer(){
+        console.log('timer suppose to go')
+        var timer = setInterval(function(){
+            sec--;
+            document.getElementById('timerDisplay').innerHTML='00:'+sec;
+            if (sec < 0) {
+                clearInterval(timer);
+                alert("Time is up!")
+            }
+        }, 1000);
+    }
+    document.getElementById('incorrect').addEventListener('click', function() {
+        sec -= 5;
+        document.getElementById('timerDisplay').innerHTML='00:'+sec;
+    });
+    startTimer();
+})();
+
+
+
+
+
+
+// GAME COUNTDOWN TIMER END
+
+
 // GETTING A NEW QUESTION 
 getNewQuestion = () => {
-    if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+    if (availableQuesions.length === 0 || questionCounter >= max_questions) {
+        localStorage.setItem('mostRecentScore', score);
+
 // GOES TO THE FINAL PAGE AFTER THE ABOVE FORMULA ENDS //
         return window.location.assign('./end.html');
     }
     questionCounter++;
+    questionCounterText.innerText = questionCounter + "/" + max_questions;
+
     const questionIndex = Math.floor(Math.random() * availableQuesions.length);
     currentQuestion = availableQuesions[questionIndex];
     question.innerText = currentQuestion.question;
@@ -135,13 +199,21 @@ choices.forEach(choice => {
       if (!acceptingAnswers) return;
   
       acceptingAnswers = false;
+     
       const selectedChoice = e.target;
       const selectedAnswer = selectedChoice.dataset["number"];
         
       const classToApply =
         selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
-// ADDS COLOR TO ANSWER AND GOES TO NEXT QUESTION AFTER TIMER AS COMPLETED //
+        if(classToApply === "correct") {
+            incrimentScore(correct_bonus);
+        
+        
+        }
+
+
+// ADDS COLOR TO ANSWER AND GOES TO NEXT QUESTION AFTER TIMER HAS COMPLETED //
       selectedChoice.parentElement.classList.add(classToApply);
       setTimeout(() => {
         selectedChoice.parentElement.classList.remove(classToApply);
@@ -151,4 +223,9 @@ choices.forEach(choice => {
   });
 // CLICK EVENT LISTENER ON QUESTION CHOICES
 // GETTING A NEW QUESTION END 
+
+incrimentScore = num => {
+    score +=num;
+    scoreText.innerText = score;
+}
 startGame();
