@@ -6,32 +6,39 @@
     <title>Star Wars End Page</title>
     <link rel="stylesheet" href="assets/CSS/style.css" />
 </head>
+
+
 <body>
+
     <div class="container">
         <div id="end" class="flex-center flex-column">
+<!-- FINAL SCORE DISPLAY AND NAME INPUT FOR HIGH SCORE -->
             <h1 id="finalScore"></h1>
-            <form>
-                <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="username"
-                >
-           
-            <button 
-            type="submit" 
-            class="btn" 
-            id="saveScoreBtn"
-            onclick="saveHighScore(event)"
-            disabled
-            >
-        
-            Save Score
-            </button>
-            </form>
+                <form>
+                    <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="username"
+                    >
+            
+                    <button 
+                    type="submit" 
+                    class="btn" 
+                    id="saveScoreBtn"
+                    onclick="saveHighScore(event)"
+                    disabled
+                    >
+                    Save Score
+                    </button>
+                </form>
+<!-- FINAL SCORE DISPLAY AND NAME INPUT FOR HIGH SCORE END -->
+
+<!-- PLAY AGAIN AND HIGH SCORE BUTTONS  -->
             <a class="btn" href="./game.html">Play Again</a>
             <a class="btn" href="./index.html">Main Menu</a>
         </div>
+<!-- FINAL SCORE DISPLAY AND NAME INPUT FOR HIGH SCORE END -->
     </div>
 
     <script src="./assets/JS/end.js"></script>
