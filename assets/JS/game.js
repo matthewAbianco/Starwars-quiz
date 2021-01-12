@@ -2,9 +2,9 @@
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'));
 const questionCounterText = document.getElementById('questionCounter')
-const scoreText = document.getElementById('score')
-
-// HTML ELEMENT AND CLASS REFERENCE END 
+const scoreText = document.getElementById('score') 
+const countdownEl = document.getElementById('countdown');
+// HTML ELEMENT AND CLASS REFERENCES END
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -101,6 +101,7 @@ let questions = [
 //CONSTANTS
 const correct_bonus = 1;
 const max_questions = 8;
+//CONSTANTS END
 
 // START GAME BUTTON 
 startGame = () => {
@@ -115,8 +116,6 @@ startGame = () => {
 const wrongAnswer = - 15;
 const startingMinutes = 5;
 let time = startingMinutes * 60;
-
-const countdownEl = document.getElementById('countdown');
 
 setInterval(updateCountdown, 1000);
 
@@ -140,7 +139,8 @@ function updateCountdown() {
         }
     }, 1000);
 }
-//////////////////////////////////////////////////////
+// GAME COUNTDOWN TIMER END
+
 function checkAnswer() {
     
 
@@ -148,8 +148,6 @@ function checkAnswer() {
     const selectedAnswer = selectedChoice.dataset["number"];
 
 }
-
-//////////////////////////////////////////////////////
 // GETTING A NEW QUESTION 
 getNewQuestion = () => {
     if (availableQuesions.length === 0 || questionCounter >= max_questions) {
@@ -189,15 +187,17 @@ choices.forEach(choice => {
       const classToApply =
         selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
+
+// INCREASES SCORE FOR CORRECT ANSWER
         if(classToApply === "correct") {
             incrimentScore(correct_bonus);
         }
-
+// TAKES TIME OFF FOR INCORRECT ANSWER
         if (classToApply === "incorrect") {
             time -= 10;
 
         }
-
+// CLICK EVENT LISTENER ON QUESTION CHOICES END
 
 
 // ADDS COLOR TO ANSWER AND GOES TO NEXT QUESTION AFTER TIMER HAS COMPLETED //
@@ -208,8 +208,8 @@ choices.forEach(choice => {
       }, 1000);
     });
   });
-// CLICK EVENT LISTENER ON QUESTION CHOICES
 // GETTING A NEW QUESTION END 
+
 
 incrimentScore = num => {
     score +=num;
