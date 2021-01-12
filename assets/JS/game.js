@@ -113,8 +113,8 @@ startGame = () => {
 
 // GAME COUNTDOWN TIMER 
 const wrongAnswer = - 15;
-const startingMinutes = 1;
-let time = startingMinutes * 2;
+const startingMinutes = 5;
+let time = startingMinutes * 60;
 
 const countdownEl = document.getElementById('countdown');
 
@@ -130,44 +130,26 @@ function updateCountdown() {
     time --;
 
     var timer = setInterval(function(){
-        sec--;
+        seconds--;
         document.getElementById('countdown').innerHTML;
         if (time < 0) {
+            time = 0 
             clearInterval(timer);
-            alert("Time is up!")
+            alert("Game over!")
+            return window.location.assign('./end.html');
         }
     }, 1000);
 }
+//////////////////////////////////////////////////////
+function checkAnswer() {
+    
 
-(function() {
-    var sec = 60;
+    const selectedChoice = e.target;
+    const selectedAnswer = selectedChoice.dataset["number"];
 
-    function startTimer(){
-        console.log('timer suppose to go')
-        var timer = setInterval(function(){
-            sec--;
-            document.getElementById('timerDisplay').innerHTML='00:'+sec;
-            if (sec < 0) {
-                clearInterval(timer);
-                alert("Time is up!")
-            }
-        }, 1000);
-    }
-    document.getElementById('incorrect').addEventListener('click', function() {
-        sec -= 5;
-        document.getElementById('timerDisplay').innerHTML='00:'+sec;
-    });
-    startTimer();
-})();
+}
 
-
-
-
-
-
-// GAME COUNTDOWN TIMER END
-
-
+//////////////////////////////////////////////////////
 // GETTING A NEW QUESTION 
 getNewQuestion = () => {
     if (availableQuesions.length === 0 || questionCounter >= max_questions) {
@@ -196,6 +178,7 @@ getNewQuestion = () => {
 // CLICK EVENT LISTENER ON QUESTION CHOICES
 choices.forEach(choice => {
     choice.addEventListener("click", e => {
+        console.log(this)
       if (!acceptingAnswers) return;
   
       acceptingAnswers = false;
@@ -208,9 +191,13 @@ choices.forEach(choice => {
 
         if(classToApply === "correct") {
             incrimentScore(correct_bonus);
-        
-        
         }
+
+        if (classToApply === "incorrect") {
+            time -= 10;
+
+        }
+
 
 
 // ADDS COLOR TO ANSWER AND GOES TO NEXT QUESTION AFTER TIMER HAS COMPLETED //
